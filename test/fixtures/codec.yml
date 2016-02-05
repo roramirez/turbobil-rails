@@ -1,3 +1,21 @@
-g711:
-  name: G.711
-  code: ulaw
+vp8:
+  name: VP8
+  code: VP8
+
+PCMA:
+  name: PCMA
+  code: PCMA
+
+PCMU:
+  name: PCMU
+  code: PCMU
+
+G722:
+  name: G722
+  code: G722
+
+OPUS:
+  name: OPUS
+  code: OPUS
+
+
