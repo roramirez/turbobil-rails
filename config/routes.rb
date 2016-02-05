@@ -19,4 +19,14 @@ Rails.application.routes.draw do
   post "/customer/account" => "customer#update_account"
   get '/customer/profile' =>  'customer#profile', as: :customer_profile
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
+
+
+  namespace :api do
+    resources :account do
+      member do
+        get 'enabled'
+      end
+    end
+  end
+
 end

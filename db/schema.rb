@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014020434) do
+ActiveRecord::Schema.define(version: 20160205165250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "account", force: true do |t|
-    t.text    "code"
-    t.integer "admin_id"
-    t.integer "customer_id"
-    t.integer "status"
-    t.text    "ip_auth"
-    t.text    "password"
+    t.text     "code"
+    t.integer  "admin_id"
+    t.integer  "customer_id"
+    t.integer  "status"
+    t.text     "ip_auth"
+    t.text     "password"
+    t.datetime "expire"
+    t.boolean  "parent",      default: true
   end
 
   create_table "account_codec", force: true do |t|
@@ -32,12 +34,12 @@ ActiveRecord::Schema.define(version: 20141014020434) do
 
   create_table "admin", force: true do |t|
     t.text     "name"
-    t.string   "email",                  limit: 255,              null: false
-    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "email",                               null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -81,7 +83,7 @@ ActiveRecord::Schema.define(version: 20141014020434) do
 
   create_table "customer", force: true do |t|
     t.text     "name"
-    t.string   "email",                  limit: 255,              null: false
+    t.string   "email",                                 null: false
     t.float    "credit"
     t.integer  "type_pay"
     t.integer  "customer_id"
@@ -89,15 +91,16 @@ ActiveRecord::Schema.define(version: 20141014020434) do
     t.integer  "admin_id"
     t.integer  "currency_id"
     t.integer  "price_customer_id"
-    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.boolean  "active",                 default: true
   end
 
   add_index "customer", ["email"], name: "index_customer_on_email", unique: true, using: :btree

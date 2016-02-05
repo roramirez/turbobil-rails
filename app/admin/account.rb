@@ -4,7 +4,7 @@ ActiveAdmin.register Account, namespace: :admins do
 
   scope_to :current_admin
 
-  permit_params :code, :customer_id, :ip_auth, :password,  codec_ids: []
+  permit_params :code, :customer_id, :ip_auth, :password, :expire, :parent, codec_ids: []
 
   filter :customer, :collection => proc {Customer.where admin: current_admin }
 
@@ -18,6 +18,9 @@ ActiveAdmin.register Account, namespace: :admins do
     f.inputs "Details" do
       f.input :code,          :as => :string
       f.input :customer,      :as => :select, :collection => Customer.where(admin: current_admin)
+      f.input :expire
+      f.input :parent
+
     end
     f.inputs "Connection" do
       f.input :ip_auth,      :as => :string
@@ -38,6 +41,8 @@ ActiveAdmin.register Account, namespace: :admins do
           codec.name
         end
       end
+      row :expire
+      row :parent
     end
   end
 
