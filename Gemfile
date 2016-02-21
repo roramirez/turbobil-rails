@@ -42,7 +42,7 @@ gem 'unicorn'
 gem 'pg', group: :postgresql
 gem "mysql2", group: :mysql
 
-gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'inifile', '~> 3.0.0'
 gem 'settingslogic'
