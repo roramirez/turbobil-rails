@@ -1,7 +1,7 @@
 class Customer < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, 
+  devise :database_authenticatable,
          :rememberable, :trackable, :validatable
   include CustomerHelper
   self.table_name = 'customer'
