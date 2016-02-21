@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get  'customer/calls'  => 'customer#calls'
   get  'customer/accounts'  => 'customer#accounts'
+  get  'customer/payments'  => 'customer#payments'
   get  'customer/prices'  => 'customer#prices'
   devise_for :customers, :path => '/customer', controllers: { sessions: :sessions }
   get "/customer" => "customer#dashboard"
