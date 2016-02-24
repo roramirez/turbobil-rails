@@ -2,7 +2,7 @@ ActiveAdmin.register Plan do
 
   scope_to :current_admin
 
-  permit_params :name, :extens, :days
+  permit_params :name, :extens, :days, :mount
 
 
   form do |f|
@@ -10,6 +10,7 @@ ActiveAdmin.register Plan do
       f.input :name,    :as => :string
       f.input :extens
       f.input :days
+      f.input :mount
     end
     f.actions
   end
@@ -19,6 +20,7 @@ ActiveAdmin.register Plan do
       row :name
       row :extens
       row :days
+      row :mount
     end
   end
 
@@ -26,6 +28,7 @@ ActiveAdmin.register Plan do
     column :name
     column :extens
     column :days
+    column :mount
     actions
   end
 
