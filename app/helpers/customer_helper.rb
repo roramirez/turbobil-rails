@@ -11,11 +11,11 @@ module CustomerHelper
   def status_payment status
     case status
       when 0
-        :procesing
+        :Processing
       when 1
-        :done
+        :Success
       when 2
-        :reject
+        :Failed
     end
   end
 end
