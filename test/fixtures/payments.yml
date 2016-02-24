@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comment: MyText
+  customer_id: 
+  status: 1
+  gateway_payments_id: 
+
+two:
+  comment: MyText
+  customer_id: 
+  status: 1
+  gateway_payments_id: 

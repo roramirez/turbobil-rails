@@ -14,6 +14,7 @@ class Customer < ActiveRecord::Base
 
   has_many :accounts
   has_many :calls
+  has_many :payments
 
   belongs_to :customer
   belongs_to :currency

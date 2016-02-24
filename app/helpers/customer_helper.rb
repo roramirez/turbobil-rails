@@ -7,4 +7,15 @@ module CustomerHelper
         :postpay
     end
   end
+
+  def status_payment status
+    case status
+      when 0
+        :procesing
+      when 1
+        :done
+      when 2
+        :reject
+    end
+  end
 end

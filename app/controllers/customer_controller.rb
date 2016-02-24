@@ -75,6 +75,10 @@ class CustomerController < ApplicationController
     end
   end
 
+  def payments
+    @payments = current_customer.payments.page(params[:page]).per(10)
+  end
+
   private
   def profile_params
     params.require(:customer).permit(:name, :email, :password)

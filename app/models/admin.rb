@@ -11,4 +11,7 @@ class Admin < ActiveRecord::Base
   has_many :routes
   has_many :providers
   has_many :customers
+  has_many :gateway_payments
+  has_many :payments, :through => :customers
+  has_many :plans
 end
