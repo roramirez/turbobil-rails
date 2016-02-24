@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get '/customer/profile' =>  'customer#profile', as: :customer_profile
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
 
+  resources :payments, path: "/customer/payments"
 
   namespace :api do
     resources :account do

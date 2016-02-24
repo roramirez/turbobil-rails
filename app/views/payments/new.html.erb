@@ -1,0 +1,77 @@
+ <div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">New Payment</h1>
+
+    <% if @payment.errors.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% @payment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  </div>
+<!-- /.col-lg-12 -->
+</div>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <%= simple_form_for @payment, :url => payments_url do |f| %>
+
+              <div class="form-group">
+                <%= f.label :plan, class: "control-label" %>
+
+                <%= f.input_field :plan_id,
+                        :collection => current_customer.admin.plans,
+                        :class => 'form-control',
+                        :required => true,
+                        :as => 'select' %>
+
+              </div>
+              <%= fields_for :creditcard, @creditcard do |cc| %>
+                <div class="form-group">
+                  <%= cc.label :first_name, class: "control-label" %>
+                  <%= cc.text_field :first_name, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= cc.label :last_name, class: "control-label" %>
+                  <%= cc.text_field :last_name, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= cc.label :number, class: "control-label" %>
+                  <%= cc.text_field :number, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= cc.label :month, class: "control-label" %>
+                  <%= cc.select :month, Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]}, {:prompt => 'Select'}, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= cc.label :year, class: "control-label" %>
+                  <%= cc.select :year, Array.new(15){|i| Date.current.year+i}, {:prompt => 'Select'}, class: "form-control" %>
+                </div>
+
+                <div class="form-group">
+                  <%= cc.label :verification_value, class: "control-label" %>
+                  <%= cc.text_field :verification_value, class: "form-control" %>
+                </div>
+
+
+              <% end %>
+
+              <%= f.submit "Pay", class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

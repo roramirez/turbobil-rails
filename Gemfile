@@ -57,3 +57,6 @@ gem 'bootstrap-sass', '~> 3.2'
 gem "font-awesome-rails", '~> 4.1'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
+gem "authorizenet" , '~> 1.8.7'
+gem "coveralls"
+gem 'activemerchant', :require => 'active_merchant'
