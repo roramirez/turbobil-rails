@@ -76,7 +76,7 @@ class CustomerController < ApplicationController
   end
 
   def payments
-    @payments = current_customer.payments.page(params[:page]).per(10)
+    @payments = current_customer.payments.page(params[:page]).per(10).order(id: :desc)
   end
 
   private
