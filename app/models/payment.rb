@@ -1,7 +1,7 @@
 class Payment < ActiveRecord::Base
   belongs_to :customer
   belongs_to :gateway_payments
-  belongs_to :plans
+  belongs_to :plan
 
   require "active_merchant/billing/rails"
   include CustomerHelper
@@ -25,6 +25,7 @@ class Payment < ActiveRecord::Base
     if response.success?
       self.authorization_code = response.params["authorization_code"]
       self.transaction_id  = response.params["transaction_id"]
+      set_comment
       self.status = SUCCESS
     else
       self.status = FAILED
@@ -37,6 +38,10 @@ class Payment < ActiveRecord::Base
 
   def success?
     self.status == SUCCESS
+  end
+
+  def set_comment
+    self.comment = "Pay #{plan.id} for extens #{plan.extens} duration #{plan.days} days"
   end
 
   private
