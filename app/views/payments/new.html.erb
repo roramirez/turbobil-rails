@@ -34,40 +34,74 @@
 
               </div>
               <%= fields_for :creditcard, @creditcard do |cc| %>
-                <div class="form-group">
-                  <%= cc.label :first_name, class: "control-label" %>
-                  <%= cc.text_field :first_name, class: "form-control" %>
+
+              <!-- idea form http://codepen.io/llgruff/full/JdyJWR/ -->
+              <!-- CREDIT CARD FORM STARTS HERE -->
+              <div class="panel panel-default credit-card-box">
+                <div class="panel-heading display-table" >
+                    <div class="row display-tr" >
+                        <h3 class="panel-title display-td" >Payment Details</h3>
+                        <div class="display-td" >
+                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                        </div>
+                    </div>
                 </div>
+                <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="name">NAME</label>
+                                          <%= cc.text_field :first_name, class: "form-control", :placeholder => "First Name"  %>
+                                          <%= cc.text_field :last_name, class: "form-control", :placeholder => "Last Name"  %>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                  <%= cc.label :last_name, class: "control-label" %>
-                  <%= cc.text_field :last_name, class: "form-control" %>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cardNumber">CARD NUMBER</label>
+                                    <div class="input-group">
+                                        <%= cc.text_field :number, class: "form-control", :placeholder => "Valid Card Number"  %>
+                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                       <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label for="expMonth">EXPIRATION DATE</label>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <%= cc.select :month, Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]}, {:prompt => ''}, class: "form-control" %>
+                                    </div>
+                                    <div class="col-xs-6 col-lg-6 pl-ziro">
+                                        <%= cc.select :year, Array.new(15){|i| Date.current.year+i}, {:prompt => ''}, class: "form-control" %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 pull-right">
+                                <div class="form-group">
+                                    <label for="cvCode">CV CODE</label>
+                                    <%= cc.text_field :verification_value, class: "form-control", :placeholder => "CV" %>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="row">
+                            <div class="col-xs-12">
+                                <%= f.submit "Pay", class: "btn btn-success btn-lg btn-block"  %>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none;>"
+                            <div class="col-xs-12">
+                                <p class="payment-errors">didi</p>
+                            </div>
+                        </div>
                 </div>
-
-                <div class="form-group">
-                  <%= cc.label :number, class: "control-label" %>
-                  <%= cc.text_field :number, class: "form-control" %>
-                </div>
-
-                <div class="form-group">
-                  <%= cc.label :month, class: "control-label" %>
-                  <%= cc.select :month, Date::ABBR_MONTHNAMES.compact.each_with_index.collect{|m, i| [m, i+1]}, {:prompt => 'Select'}, class: "form-control" %>
-                </div>
-
-                <div class="form-group">
-                  <%= cc.label :year, class: "control-label" %>
-                  <%= cc.select :year, Array.new(15){|i| Date.current.year+i}, {:prompt => 'Select'}, class: "form-control" %>
-                </div>
-
-                <div class="form-group">
-                  <%= cc.label :verification_value, class: "control-label" %>
-                  <%= cc.text_field :verification_value, class: "form-control" %>
-                </div>
-
-
-              <% end %>
-
-              <%= f.submit "Pay", class: 'btn btn-primary' %>
+            </div>
+            <!-- CREDIT CARD FORM ENDS HERE -->
+            <% end %>
             <% end %>
           </div>
         </div>
