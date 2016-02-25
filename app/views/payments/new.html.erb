@@ -1,3 +1,4 @@
+ <%= stylesheet_link_tag "payment" %>
  <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">New Payment</h1>
@@ -16,6 +17,32 @@
 <!-- /.col-lg-12 -->
 </div>
 <div class="row">
+  <div class="col-lg-12">
+
+  <!-- Idea from http://bootsnipp.com/snippets/z1EBX -->
+  <!-- PRICING TABLE STYLE 1-->
+    <div class="row">
+      <% colors =  ["warning", "primary", "success", "info"]; i= 0 %>
+      <% current_customer.admin.plans.each do  |plan| %>
+      <% i = i + 1 %>
+      <div class="col-md-3 col-sm-6 col-xs-12 float-shadow" id="plan-<%= plan.id %>">
+        <div class="selected_payment" style="display: none;"><strong>Selected</strong></div>
+        <div class="price_table_container">
+        <div class="price_table_heading"><%= plan.name %></div>
+          <div class="price_table_body">
+            <div class="price_table_row cost <%= colors[i %4] %>-bg"><strong>$ <%= plan.mount%></strong><span></span></div>
+            <div class="price_table_row"><%= plan.days %> Days</div>
+            <div class="price_table_row"><%= plan.extens %> Extensions</div>
+            <div class="price_table_row">Ulimited calls</div>
+          </div>
+           <a href="#" data-plan="<%= plan.id %>" class="btn btn-<%= colors[i % 4]%> btn-lg btn-block btn-square">Select</a>
+         </div>
+      </div>
+      <% end %>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-lg-6">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -23,16 +50,7 @@
           <div class="col-lg-12">
             <%= simple_form_for @payment, :url => payments_url do |f| %>
 
-              <div class="form-group">
-                <%= f.label :plan, class: "control-label" %>
-
-                <%= f.input_field :plan_id,
-                        :collection => current_customer.admin.plans,
-                        :class => 'form-control',
-                        :required => true,
-                        :as => 'select' %>
-
-              </div>
+                <%= f.hidden_field :plan_id %>
               <%= fields_for :creditcard, @creditcard do |cc| %>
 
               <!-- idea form http://codepen.io/llgruff/full/JdyJWR/ -->
@@ -109,3 +127,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('.btn-square').on('click', function (){
+    id = $(this).data('plan');
+    $('.selected_payment').hide();
+    $('#plan-' + id + ' > .selected_payment').show();
+    $('#payment_plan_id').val(id)
+  });
+</script>

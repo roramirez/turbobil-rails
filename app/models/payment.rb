@@ -7,7 +7,7 @@ class Payment < ActiveRecord::Base
   include CustomerHelper
 
   validates :valid_card, :inclusion => {:in => [true], :message => 'Invalid Credit Card'}
-  validates :plan_id, :presence => true, :numericality => { :greater_than => 0 }
+  validates :plan_id, :numericality => { :message => " select one" }
 
   PROCESSING, FAILED, SUCCESS = 0, 2, 1
   def status_label

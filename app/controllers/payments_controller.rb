@@ -13,10 +13,10 @@ class PaymentsController < ApplicationController
     current_customer.payments << @payment
 
     @creditcard = ActiveMerchant::Billing::CreditCard.new(params[:creditcard])
-    @payment.mount = @payment.plan.mount
-
     @payment.valid_card = @creditcard.valid?
+
     if @payment.valid?
+      @payment.mount = @payment.plan.mount
       @payment = @payment.process_payment(@creditcard)
       if @payment.success?
         @payment.save
