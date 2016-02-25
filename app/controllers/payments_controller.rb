@@ -20,6 +20,11 @@ class PaymentsController < ApplicationController
       @payment = @payment.process_payment(@creditcard)
       if @payment.success?
         @payment.save
+
+        # other operations after payment
+        @current_customer.extens = @payment.plan.extens
+        @current_customer.save
+
         flash[:notice] = 'Payment Success'
         redirect_to payments_url and return
       else
