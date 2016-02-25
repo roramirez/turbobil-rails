@@ -14,6 +14,7 @@
               <th>Code</th>
               <th>IP Auth</th>
               <th>Password</th>
+              <th>Expire</th>
               <th>Codecs</th>
               <th>Action</th>
             </tr>
@@ -24,6 +25,7 @@
               <td><%= account.code %></td>
               <td><%= account.ip_auth %></td>
               <td><%= account.password %></td>
+              <td><%= account.expire %></td>
               <td>
                 <% account.codecs.each do |codec| %>
                   <%= codec.name %>

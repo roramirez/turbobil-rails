@@ -24,6 +24,14 @@ class PaymentsController < ApplicationController
         # other operations after payment
         @current_customer.extens = @payment.plan.extens
         @current_customer.save
+        @current_customer.accounts.each do |account|
+          if account.expire.nil?
+            account.expire = Time.now + @payment.plan.days.days
+          else
+            account.expire = account.expire + @payment.plan.days.days
+          end
+          account.save
+        end
 
         flash[:notice] = 'Payment Success'
         redirect_to payments_url and return
