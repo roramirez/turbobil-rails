@@ -18,7 +18,7 @@ class Payment < ActiveRecord::Base
     ActiveMerchant::Billing::Base.mode = :test
     self.status = PROCESSING
 
-    response = gateway.purchase(mount, creditcard)
+    response = gateway.purchase(self.mount * 100, creditcard)
 
     self.gateway_payments_id = auth.id
     logger.debug response.message
