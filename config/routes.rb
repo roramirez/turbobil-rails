@@ -11,17 +11,15 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get  'customer/calls'  => 'customer#calls'
-  get  'customer/accounts'  => 'customer#accounts'
   get  'customer/payments'  => 'customer#payments'
   get  'customer/prices'  => 'customer#prices'
   devise_for :customers, :path => '/customer', controllers: { sessions: :sessions }
   get "/customer" => "customer#dashboard"
-  get "/customer/account/:id" => "customer#edit_account", as: 'account'
-  post "/customer/account" => "customer#update_account"
   get '/customer/profile' =>  'customer#profile', as: :customer_profile
   post '/customer/profile' =>  'customer#update_profile', as: :customer_update_profile
 
   resources :payments, path: "/customer/payments"
+  resources :accounts, path: "/customer/accounts"
 
   namespace :api do
     resources :account do

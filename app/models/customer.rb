@@ -33,4 +33,9 @@ class Customer < ActiveRecord::Base
         .sum(:duration)
   end
 
+  def is_maximum_exten
+     accounts.count() < extens
+  end
+
+
 end
